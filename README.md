@@ -141,3 +141,10 @@ const EXECUTABLE_PATH = path.join(
   "public"
 );
 ```
+
+#### 7.3 国内镜像加速
+
+```
+npm config set ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/
+npm config set ELECTRON_BUILDER_BINARIES_MIRROR=https://npm.taobao.org/mirrors/electron-builder-binaries/
+```

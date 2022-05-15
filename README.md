@@ -82,6 +82,8 @@ electron-react-tpl
 
 ![image](https://user-images.githubusercontent.com/11046969/168466600-734b8b4a-2899-48e0-accf-ab98d12870f2.png)
 
+![image](https://user-images.githubusercontent.com/11046969/168472220-131303db-8f50-412c-be29-de14030c32ce.png)
+
 
 ## 4. 生成各平台图标
 

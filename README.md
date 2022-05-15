@@ -76,6 +76,13 @@ electron-react-tpl
 }
 ```
 
+默认配置基本是可以满足的，需要更细致的配置可以参考 [这里](https://www.electron.build/)。
+
+> 注意：`build` 属性中的 `extends` 属性不要动，否则 CRA 会影响 Electron 的入口配置。
+
+![image](https://user-images.githubusercontent.com/11046969/168466600-734b8b4a-2899-48e0-accf-ab98d12870f2.png)
+
+
 ## 4. 生成各平台图标
 
 在 `public/icon/` 中放入一线 `icon.png`，执行 `npm run gen-icon` 即可生成。
@@ -104,3 +111,33 @@ checkUpdate(
 
 ![image](https://user-images.githubusercontent.com/11046969/168465596-3ba51b56-3d00-409e-b260-a3183ba79214.png)
 
+## 7. 其他
+
+#### 7.1 启动问题
+开发模式下启动采用的 `concurrently` 和 `wait-on` 配合的，并行启动 React 和 Electron，Electron 等待 React 启动完成后开始启动。通过环境变量 `BROWSER=none` 来停止 CRA 自动打开浏览器：
+
+```
+concurrently "cross-env BROWSER=none npm run start-web"  "wait-on http://localhost:3000 && npm run start-electron" 
+```
+
+#### 7.2 可执行目录问题
+
+使用 `child_process.exec` 等执行某个可执行文件时，无法从 app.asar 中使用，所以在打包的时候需要将这个文件不打包到 app.asar 内部，在 `build` 中的 `extraResources` 属性中声明即可。如此项目中所有的可执行文件都放在 `public` 中，所以配置如下：
+
+```
+    "extraResources": [
+      "public"
+    ]
+```
+
+使用时，可以这样取目录：
+
+```js
+const APP_PATH = app.getAppPath();
+const EXECUTABLE_PATH = path.join(
+  APP_PATH.indexOf("app.asar") > -1
+    ? APP_PATH.substring(0, APP_PATH.indexOf("app.asar"))
+    : APP_PATH,
+  "public"
+);
+```

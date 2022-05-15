@@ -17,7 +17,6 @@ function createWindow() {
     height: 600,
     // resizable: false,
     // maximizable: false,
-    icon: CONFIG.APP_ICON_ICO,
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,

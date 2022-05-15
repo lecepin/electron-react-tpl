@@ -13,8 +13,6 @@ const EXECUTABLE_PATH = path.join(
 );
 
 export default {
-  // BrowserWindow 的 icon 在 windows 下无法显示 asar 下的图标，所以从 EXECUTABLE_PATH 读取
-  APP_ICON_ICO: path.join(EXECUTABLE_PATH, "./icon/icon.ico"),
   APP_START_URL: isDev
     ? "http://localhost:3000"
     : url.format({

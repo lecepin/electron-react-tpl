@@ -10,7 +10,7 @@ function checkUpdate(
 ) {
   get(packageUrl)
     .then(({ data }) => {
-      if (semver.gt(data?.version, app.getVersion()) || 1) {
+      if (semver.gt(data?.version, app.getVersion())) {
         const result = dialog.showMessageBoxSync({
           message: "发现新版本，是否更新？",
           type: "question",

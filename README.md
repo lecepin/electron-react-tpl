@@ -7,7 +7,7 @@
 ## 1. 使用
 
 - 克隆此仓库
-- 安装依赖 `npm install`
+- 安装依赖 `yarn install`
 - 开发环境启动 `npm start`
 
 ## 2. 目录结构

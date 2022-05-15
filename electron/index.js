@@ -1,11 +1,16 @@
 import { app, BrowserWindow } from "electron";
 import log from "electron-log";
 import CONFIG from "./const";
+import { checkUpdate } from "./utils";
 
 app.commandLine.appendSwitch("--no-proxy-server");
 
 function createWindow() {
   // electron.Menu.setApplicationMenu(null);
+  checkUpdate(
+    "https://cdn.jsdelivr.net/gh/lecepin/electron-react-tpl/package.json",
+    "https://github.com/lecepin/electron-react-tpl/releases"
+  );
 
   mainWindow = new BrowserWindow({
     width: 800,

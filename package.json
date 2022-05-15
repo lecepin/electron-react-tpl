@@ -21,6 +21,11 @@
       "distDir": "build-electron"
     }
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier -c --write \"(src/**/*|electron/**/*)\" && git add -A ."
+    }
+  },
   "devDependencies": {
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",

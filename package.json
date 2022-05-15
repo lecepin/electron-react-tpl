@@ -5,6 +5,7 @@
   "main": "./build-electron/index.js",
   "homepage": "./",
   "scripts": {
+    "postinstall": "husky install",
     "start": "concurrently \"cross-env BROWSER=none npm run start-web\"  \"wait-on http://localhost:3000 && npm run start-electron\" ",
     "start-web": "react-app-rewired start",
     "start-electron": "parcel build --target electron --no-cache && electron .",

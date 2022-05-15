@@ -2,8 +2,6 @@ import { app, BrowserWindow } from "electron";
 import log from "electron-log";
 import CONFIG from "./const";
 
-let mainWindow;
-
 app.commandLine.appendSwitch("--no-proxy-server");
 
 function createWindow() {
@@ -30,16 +28,18 @@ function createWindow() {
   });
 }
 
-app.on("ready", createWindow);
+app.whenReady().then(() => {
+  createWindow();
 
-app.on("window-all-closed", function () {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
-app.on("activate", function () {
-  if (mainWindow === null) {
-    createWindow();
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
   }
 });

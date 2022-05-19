@@ -1,5 +1,17 @@
-module.exports = function override(config, env) {
-  config.target = "electron-renderer";
+const { override, addLessLoader, adjustStyleLoaders } = require('customize-cra');
 
-  return config;
-};
+module.exports = override(
+  addLessLoader({
+    lessOptions: {
+      javascriptEnabled: true,
+    },
+  }),
+  adjustStyleLoaders(({ use: [, , postcss] }) => {
+    const postcssOptions = postcss.options;
+    postcss.options = { postcssOptions };
+  }),
+  function (config) {
+    config.target = 'electron-renderer';
+    return config;
+  },
+);

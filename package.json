@@ -8,19 +8,13 @@
     "postinstall": "husky install",
     "start": "concurrently \"cross-env BROWSER=none npm run start-web\"  \"wait-on http://localhost:3000 && npm run start-electron\" ",
     "start-web": "react-app-rewired start",
-    "start-electron": "parcel build --target electron --no-cache && electron .",
+    "start-electron": "webpack --config webpack.electron.js && electron .",
     "build-web": "react-app-rewired build",
-    "build-electron": "parcel build --target electron --no-cache",
+    "build-electron": "webpack --config webpack.electron.js",
     "build-all": "rm -rf ./build && rm -rf ./build-electron && npm run build-electron && npm run build-web",
     "pack": "npm run build-all && electron-builder",
-    "gen-icon": "electron-icon-builder --input=./public/icon/icon.png --output=./public/icon"
-  },
-  "targets": {
-    "electron": {
-      "source": "electron/index.js",
-      "context": "electron-main",
-      "distDir": "build-electron"
-    }
+    "gen-icon": "electron-icon-builder --input=./public/icon/icon.png --output=./public/icon",
+    "pretty": "prettier -c --write \"(src/**/*|electron/**/*)\""
   },
   "husky": {
     "hooks": {
@@ -37,11 +31,12 @@
     "husky": "^8.0.1",
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
-    "parcel": "^2.5.0",
     "prettier": "^2.6.2",
     "react-app-rewired": "^2.2.1",
     "react-scripts": "5.0.1",
-    "wait-on": "^6.0.1"
+    "wait-on": "^6.0.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
   },
   "dependencies": {
     "axios": "^0.27.2",

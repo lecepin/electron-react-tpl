@@ -12,4 +12,7 @@ module.exports = {
   devtool: 'source-map',
   target: 'electron-main',
   node: false,
+  stats: {
+    errorDetails: true,
+  },
 };
